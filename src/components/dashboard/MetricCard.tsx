@@ -9,7 +9,7 @@ interface MetricCardProps {
   value: number;
   change: number;
   type: "currency" | "percent" | "number";
-  icon: any;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 import { useState, useEffect } from "react";
@@ -18,7 +18,7 @@ function AnimatedValue({ value, type }: { value: number; type: string }) {
   const [displayValue, setDisplayValue] = useState(0);
 
   useEffect(() => {
-    let start = 0;
+    const start = 0;
     const end = value;
     const duration = 1000; // 1s
     let startTime: number | null = null;

@@ -6,7 +6,7 @@ export interface MessageEvent {
 
 export function useWebSocket(url: string = process.env.NEXT_PUBLIC_WS_URL || 'ws://localhost:8000') {
   const [isConnected, setIsConnected] = useState(false);
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<Record<string, any> | null>(null);
   const socketRef = useRef<WebSocket | null>(null);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function useWebSocket(url: string = process.env.NEXT_PUBLIC_WS_URL || 'ws
     };
   }, [url]);
 
-  const send = (message: any) => {
+  const send = (message: Record<string, any>) => {
     if (socketRef.current && isConnected) {
       socketRef.current.send(JSON.stringify(message));
     }

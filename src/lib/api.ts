@@ -48,7 +48,7 @@ export async function fetchRiskMetrics(symbol: string) {
   return res.json();
 }
 
-export async function streamAIResponse(messages: any[], onChunk: (chunk: string) => void) {
+export async function streamAIResponse(messages: { role: string; content: string }[], onChunk: (chunk: string) => void) {
   const res = await fetch(`${API_BASE}/api/ai/chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
