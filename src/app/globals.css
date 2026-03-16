@@ -1,26 +1,274 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* ── Design Tokens ── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --lime: #c6ff00;
+  --lime-dim: #9ecc00;
+  --ink: #03050d;
+  --ink2: #070b18;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --rim: rgba(255, 255, 255, 0.07);
+  --rim-strong: rgba(255, 255, 255, 0.12);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.35);
+  --danger: #ff4444;
+  --success: #00e676;
+  --warning: #ffab00;
+  --font-display: 'Oxanium', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* ── Tailwind v4 Theme ── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-lime: var(--lime);
+  --color-lime-dim: var(--lime-dim);
+  --color-ink: var(--ink);
+  --color-ink2: var(--ink2);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-rim: var(--rim);
+  --color-rim-strong: var(--rim-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Global Reset & Body ── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Aurora Background ── */
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.aurora-bg::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  z-index: 0;
+  background:
+    radial-gradient(600px circle at 20% 30%, rgba(198, 255, 0, 0.12), transparent 60%),
+    radial-gradient(500px circle at 70% 60%, rgba(0, 200, 255, 0.08), transparent 60%),
+    radial-gradient(400px circle at 40% 80%, rgba(130, 80, 255, 0.06), transparent 60%),
+    radial-gradient(450px circle at 80% 20%, rgba(198, 255, 0, 0.06), transparent 60%);
+  animation: aurora-float 20s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes aurora-float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5%, -3%) rotate(1deg); }
+  50% { transform: translate(-3%, 5%) rotate(-1deg); }
+  75% { transform: translate(3%, 3%) rotate(0.5deg); }
+}
+
+/* ── Blob Animations ── */
+.blob-1, .blob-2, .blob-3, .blob-4 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob-1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(198, 255, 0, 0.15);
+  top: 10%;
+  left: 15%;
+  animation: blob1 18s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 350px;
+  height: 350px;
+  background: rgba(0, 200, 255, 0.1);
+  top: 50%;
+  right: 15%;
+  animation: blob2 22s ease-in-out infinite;
+}
+
+.blob-3 {
+  width: 300px;
+  height: 300px;
+  background: rgba(130, 80, 255, 0.08);
+  bottom: 10%;
+  left: 40%;
+  animation: blob3 25s ease-in-out infinite;
+}
+
+.blob-4 {
+  width: 280px;
+  height: 280px;
+  background: rgba(198, 255, 0, 0.08);
+  top: 30%;
+  right: 30%;
+  animation: blob4 20s ease-in-out infinite;
+}
+
+@keyframes blob1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(80px, -40px) scale(1.1); }
+  66% { transform: translate(-40px, 60px) scale(0.95); }
+}
+
+@keyframes blob2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-60px, 30px) scale(1.08); }
+  66% { transform: translate(50px, -50px) scale(0.9); }
+}
+
+@keyframes blob3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(40px, 40px) scale(1.15); }
+  66% { transform: translate(-60px, -20px) scale(0.92); }
+}
+
+@keyframes blob4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-50px, -30px) scale(0.95); }
+  66% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+/* ── Marquee ── */
+.marquee-track {
+  display: flex;
+  animation: marquee-scroll 30s linear infinite;
+  width: max-content;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--rim);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--rim-strong);
+}
+
+/* ── Text Gradient ── */
+.text-gradient-lime {
+  background: linear-gradient(135deg, var(--lime) 0%, #a8e600 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glow Effects ── */
+.glow-lime {
+  box-shadow: 0 0 20px rgba(198, 255, 0, 0.15), 0 0 60px rgba(198, 255, 0, 0.05);
+}
+
+.glow-lime-strong {
+  box-shadow: 0 0 30px rgba(198, 255, 0, 0.25), 0 0 80px rgba(198, 255, 0, 0.1);
+}
+
+/* ── Magnetic Button ── */
+.btn-magnetic {
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* ── Clip Path Text Reveal ── */
+.text-reveal {
+  animation: clip-reveal 1s ease-out forwards;
+  clip-path: inset(0 100% 0 0);
+}
+
+@keyframes clip-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* ── Chart Line Animation ── */
+.chart-line-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: line-draw 2s ease-out forwards;
+}
+
+@keyframes line-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ── Utility overrides ── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
 }
